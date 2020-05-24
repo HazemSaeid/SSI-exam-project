@@ -4,6 +4,15 @@ from objects.objects import CovidCase
 
 graph = neo.Graph("bolt://localhost:7687", auth=("neo4j","12345"))
 
+#async def insert_csv_data():
+    #stmt = """ 
+    #LOAD CSV WITH HEADERS FROM src\resources\us-counties.csv AS row 
+    #MERGE (s:State {state: row.name})
+    #MERGE (c:Cases {date: row.date, amount: row.amount, deaths:row.deaths})
+    #MERGE (co:County {name: row.county})
+    #"""
+
+
 async def add_covid_data(_state, _county,_date, _cases, _deaths):
     tx = graph.begin()
     state = neo.Node("State", name = _state )
@@ -19,3 +28,5 @@ async def add_covid_data(_state, _county,_date, _cases, _deaths):
     tx.create(cases)
     tx.create(county_rel_cases)
     tx.commit()
+
+asyncio.run(add_covid_data("h","dd","dsa",12,22))

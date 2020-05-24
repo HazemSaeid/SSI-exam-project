@@ -8,10 +8,7 @@
 
 ##### Installation
 
-`pip install py2neo`
-`pip install couchdb`
-`pip install flask`
-`pip install aioredis`
+`pip install -r requirements.txt`
 
 
 run server on: `flask run`
