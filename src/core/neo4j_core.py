@@ -28,5 +28,10 @@ async def add_covid_data(_state, _county,_date, _cases, _deaths):
     tx.create(cases)
     tx.create(county_rel_cases)
     tx.commit()
+async def get_cases_from_county(_county):
+    tx = graph.begin()
+    stmt = graph.run(f"MATCH (c:County)-[r:REGISTERED]-(ca:Cases) where c.name = '{_county}' RETURN  ca limit 5000").data()
 
-asyncio.run(add_covid_data("h","dd","dsa",12,22))
+
+#asyncio.run(add_covid_data("h","Orange County","dsa",12,22))
+asyncio.run(get_cases_from_county("Orange County"))
