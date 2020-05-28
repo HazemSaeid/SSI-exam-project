@@ -1,17 +1,28 @@
+from redis import Redis
+from redis_cache import RedisCache
 from pymongo import MongoClient
 from bson.json_util import dumps
 import pandas as pd
 
-client = MongoClient()
-db = client.local
+m_client = MongoClient()
+db = m_client.local
+
+r_client = Redis(host="localhost", port=6379)
+cache = RedisCache(redis_client=r_client)
 
 
 def add_initial_covid_data():
-    data = pd.read_csv('../resources/us-counties.csv')
+    try:
+        data = pd.read_csv('./resources/us-counties.csv')
 
-    db.cases.insert_many(data.to_dict('records'))
+        db.cases.insert_many(data.to_dict('records'))
+
+        return 'The source data was added to MongoDB successfully.'
+    except:
+        return 'An exception occurred'
 
 
+@cache.cache(ttl=900)
 def total_cases_by_date():
     data = db.cases.aggregate([
         {
@@ -26,6 +37,7 @@ def total_cases_by_date():
     return dumps(data)
 
 
+@cache.cache(ttl=900)
 def total_cases_in(key, value):
     data = db.cases.aggregate([
         {
@@ -42,6 +54,7 @@ def total_cases_in(key, value):
     return dumps(data)
 
 
+@cache.cache(ttl=900)
 def cases_history_in(key, value):
     data = db.cases.aggregate([
         {
@@ -62,6 +75,7 @@ def cases_history_in(key, value):
     return dumps(data)
 
 
+@cache.cache(ttl=900)
 def total_deaths_by_date():
     data = db.cases.aggregate([
         {
@@ -76,6 +90,7 @@ def total_deaths_by_date():
     return dumps(data)
 
 
+@cache.cache(ttl=900)
 def total_deaths_in(key, value):
     data = db.cases.aggregate([
         {
@@ -92,6 +107,7 @@ def total_deaths_in(key, value):
     return dumps(data)
 
 
+@cache.cache(ttl=900)
 def deaths_history_in(key, value):
     data = db.cases.aggregate([
         {

@@ -1,5 +1,7 @@
 wheel
+pandas
 flask
 py2neo
 pymongo
-aioredis
+redis
+python-redis-cache
