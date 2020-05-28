@@ -17,7 +17,7 @@ async def add_covid_data(_state, _county,_date, _cases, _deaths):
     tx = graph.begin()
     state = neo.Node("State", name = _state )
     county = neo.Node("County", name = _county)
-    cases = neo.Node("Cases", date= _date, amount = _cases, deaths = _deaths)
+    cases = neo.Node(_date, amount = _cases, deaths = _deaths)
 
     state_rel_county = neo.Relationship(state, "HAS", county)
     county_rel_cases = neo.Relationship(county, "REGISTERED", cases)
@@ -35,5 +35,5 @@ async def get_cases_from_county(_county):
 
 
 
-#asyncio.run(add_covid_data("h","Orange County","dsa",12,22))
+asyncio.run(add_covid_data("Texas","Orange County","2020-05-14",12,22))
 #asyncio.run(get_cases_from_county("Orange County"))
