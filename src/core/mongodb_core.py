@@ -4,10 +4,10 @@ from pymongo import MongoClient
 from bson.json_util import dumps
 import pandas as pd
 
-m_client = MongoClient()
+m_client = MongoClient(host='mongodb', port=27017)
 db = m_client.local
 
-r_client = Redis(host="localhost", port=6379)
+r_client = Redis(host="redis", port=6379)
 cache = RedisCache(redis_client=r_client)
 
 
@@ -20,6 +20,7 @@ def add_initial_covid_data():
         return 'The source data was added to MongoDB successfully.'
     except:
         return 'An exception occurred'
+
 
 
 @cache.cache(ttl=900)
