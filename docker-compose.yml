@@ -8,11 +8,22 @@ services:
       - redis
       - mongodb
   mongodb:
-      image: mongo:latest
-      restart: always
-      ports:
-        - 27017:27017
+    image: mongo:latest
+    restart: always
+    ports:
+      - 27017:27017
   redis:
-    image: "redis:alpine"
+    image: redis:alpine
     ports:
       - 6379:6379
+  neo4j:
+    image: neo4j:latest
+    restart: always
+    ports:
+      - 7474:7474
+      - 7687:7687
+  cassandra:
+    image: cassandra:latest
+    restart: always
+    ports:
+      - 7000:7000
