@@ -2,13 +2,11 @@
 
 #### Getting started with the project
 
-##### Prerequisities 
-* Python 3.7 or greater
-* pip 19.2 or greater
-
 ##### Installation
+We have containerised our project, therefore we may run the project by executing the following docker command:
 
-`pip install -r requirements.txt`
+`docker-compose up`
 
+After the containers have successfully started, our API will be exposed on `localhost` port `5000`
 
-run server on: `flask run`
+Now, we only need to populate our database, which can be done by visiting `http://localhost:5000/`
