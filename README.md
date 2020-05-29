@@ -1,8 +1,8 @@
 # SSI COVID 10 Data insights and analytics
 
-#### Getting started with the project
+## Getting started with the project
 
-##### Installation
+### Installation
 We have containerised our project, therefore we may run the project by executing the following docker command:
 
 `docker-compose up`
