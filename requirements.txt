@@ -1,7 +1,9 @@
 wheel
 pandas
 flask
+psycopg2
 py2neo
 pymongo
 redis
 python-redis-cache
+flask-jwt-extended
