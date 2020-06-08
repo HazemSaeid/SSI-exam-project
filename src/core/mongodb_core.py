@@ -13,7 +13,7 @@ cache = RedisCache(redis_client=r_client)
 
 def add_initial_covid_data():
     try:
-        data = pd.read_csv('./resources/us-counties.csv')
+        data = pd.read_csv('./resources/covid.csv')
 
         db.cases.insert_many(data.to_dict('records'))
 
