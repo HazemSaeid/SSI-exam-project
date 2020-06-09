@@ -15,7 +15,7 @@ def total_death_cases_in(state, county=None):
     return cn.total_death_cases_in(state, county)
 
 
-@death_routes.route("/deaths/<state>")
-@death_routes.route("/deaths/<state>/<county>")
+@death_routes.route("/history/deaths/<state>")
+@death_routes.route("/history/deaths/<state>/<county>")
 def total_death_cases_historical(state, county=None):
     return cn.total_death_cases_historical(state, county)

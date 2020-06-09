@@ -15,7 +15,7 @@ def total_cases_in(state, county=None):
     return cn.total_cases_in(state, county)
 
 
-@case_routes.route("/cases/<state>")
-@case_routes.route("/cases/<state>/<county>")
+@case_routes.route("/history/cases/<state>")
+@case_routes.route("/history/cases/<state>/<county>")
 def total_cases_historical(state, county=None):
     return cn.total_cases_historical(state, county)
