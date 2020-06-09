@@ -22,7 +22,6 @@ def add_initial_covid_data():
         return 'An exception occurred'
 
 
-
 @cache.cache(ttl=900)
 def total_cases_by_date():
     data = db.cases.aggregate([
