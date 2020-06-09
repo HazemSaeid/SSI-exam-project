@@ -4,10 +4,10 @@ from pymongo import MongoClient
 from bson.json_util import dumps
 import pandas as pd
 
-m_client = MongoClient(host='mongodb', port=27017)
+m_client = MongoClient(host='localhost', port=27017)
 db = m_client.local
 
-r_client = Redis(host="redis", port=6379)
+r_client = Redis(host="localhost", port=6379)
 cache = RedisCache(redis_client=r_client)
 
 

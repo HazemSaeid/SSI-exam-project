@@ -3,16 +3,16 @@ from redis import Redis
 from redis_cache import RedisCache
 from bson.json_util import dumps
 
-graph = neo.Graph("bolt://neo4j:7687", auth=("neo4j", "12345"))
+graph = neo.Graph("bolt://localhost:7687", auth=("neo4j", "12345"))
 
-r_client = Redis(host="redis", port=6379)
+r_client = Redis(host="localhost", port=6379)
 cache = RedisCache(redis_client=r_client)
 
 
 def sync_data():
     try:
         graph.run("""
-        :auto USING PERIODIC COMMIT 500
+        USING PERIODIC COMMIT 500
         LOAD CSV WITH HEADERS FROM "file:///covid.csv" AS row
         MERGE (s: State {name: row.state})
         MERGE (c:County {name: row.county, state: row.state})

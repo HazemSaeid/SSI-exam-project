@@ -3,7 +3,7 @@ import asyncio
 import os
 from datetime import datetime
 
-cluster = cs.Cluster(['cassandra'], port=7000)
+cluster = cs.Cluster(['localhost'], port=7000)
 
 session = cluster.connect('ssi')
 
