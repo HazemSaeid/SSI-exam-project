@@ -9,11 +9,12 @@ services:
   #     - neo4j
   #     - cassandra
   #     - mongodb
-  # mongodb:
-  #   image: mongo:latest
-  #   restart: always
-  #   ports:
-  #     - 27017:27017
+
+  mongodb:
+    image: mongo:latest
+    restart: always
+    ports:
+      - 27017:27017
 
   # postgres:
   #   image: postgres:latest
