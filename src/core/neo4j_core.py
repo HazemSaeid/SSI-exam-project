@@ -13,7 +13,7 @@ def sync_data():
     try:
         graph.run("""
         :auto USING PERIODIC COMMIT 500
-        LOAD CSV WITH HEADERS FROM "https://raw.githubusercontent.com/HazemSaeid/SSI-exam-project/master/src/resources/covid.csv" AS row
+        LOAD CSV WITH HEADERS FROM "file:///covid.csv" AS row
         MERGE (s: State {name: row.state})
         MERGE (c:County {name: row.county, state: row.state})
         CREATE (d:Cases {date: row.date, amount: row.cases, deaths: row.deaths})
