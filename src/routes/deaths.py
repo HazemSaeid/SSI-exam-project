@@ -1,19 +1,21 @@
 from flask import Blueprint
-import core.mongodb_core as cm
+import core.neo4j_core as cn
 
 death_routes = Blueprint('death_routes', __name__)
 
 
 @death_routes.route("/deaths")
-def total_deaths_by_date():
-    return cm.total_deaths_by_date()
+def get_total_death_cases_statistics():
+    return cn.get_total_death_cases_statistics()
 
 
-@death_routes.route("/deaths/<key>/<value>/history")
-def deaths_history_in(key, value):
-    return cm.deaths_history_in(key, value)
+@death_routes.route("/deaths/<state>")
+@death_routes.route("/deaths/<state>/<county>")
+def total_death_cases_in(state, county=None):
+    return cn.total_death_cases_in(state, county)
 
 
-@death_routes.route("/deaths/<key>/<value>")
-def total_deaths_in(key, value):
-    return cm.total_deaths_in(key, value)
+@death_routes.route("/deaths/<state>")
+@death_routes.route("/deaths/<state>/<county>")
+def total_death_cases_historical(state, county=None):
+    return cn.total_death_cases_historical(state, county)
