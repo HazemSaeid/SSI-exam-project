@@ -98,7 +98,7 @@ def total_death_cases_historical(state, county=None):
     if(county != None):
         data = graph.run(f"match (c:County)-[:ON]->(ca:Cases) where c.state = '{state}' and c.name = '{county}' return SUM(toInteger(ca.deaths)) as total_deaths , ca.date as date order by date asc")
 
-        log_event('Neo4j', f'total death cases historically in {state} in {county}', 'READ')
+        log_event('Neo4j', f'total death cases historically in {state}', 'READ')
     else:
         data = graph.run(f"match (c:County)-[:ON]->(ca:Cases) where c.state = '{state}' return SUM(toInteger(ca.deaths)) as total_deaths , ca.date as date order by date asc")
 
