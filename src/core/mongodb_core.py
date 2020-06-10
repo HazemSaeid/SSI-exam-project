@@ -1,13 +1,14 @@
 from redis import Redis
 from redis_cache import RedisCache
 from pymongo import MongoClient
+from core.cassandra_core import log_event
 from bson.json_util import dumps
 import pandas as pd
 
-m_client = MongoClient(host='localhost', port=27017)
+m_client = MongoClient(host='mongodb', port=27017)
 db = m_client.local
 
-r_client = Redis(host="localhost", port=6379)
+r_client = Redis(host="redis", port=6379)
 cache = RedisCache(redis_client=r_client)
 
 
@@ -16,6 +17,8 @@ def add_initial_covid_data():
         data = pd.read_csv('./resources/covid.csv')
 
         db.cases.insert_many(data.to_dict('records'))
+
+        log_event('MongoDB', 'initial data', 'CREATE')
 
         return 'The source data was added to MongoDB successfully.'
     except:

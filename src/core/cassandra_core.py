@@ -3,12 +3,12 @@ import asyncio
 import os
 from datetime import datetime
 
-cluster = cs.Cluster(['localhost'], port=7000)
+cluster = cs.Cluster(['cassandra'], port=9042)
 
-session = cluster.connect('ssi')
+session = cluster.connect('local')
 
 
-async def log_event(db_name, message, tx_type):
+def log_event(db_name, message, tx_type):
     log_date = str(datetime.now())
-    stmt = session.execute(f"insert into transactions (transaction_id, db_name, log_message, transaction_date, transaction_type) values (uuid(),'{db_name}','{message}','{log_date}', '{tx_type}' );")
+    session.execute(f"insert into covid (id, db_name, log_message, transaction_date, transaction_type) values (uuid(),'{db_name}','{message}','{log_date}', '{tx_type}');")
 

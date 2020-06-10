@@ -1,32 +1,20 @@
 version: '3'
 services:
-  # api:
-  #   build: .
-  #   ports:
-  #     - 5000:5000
-  #   depends_on:
-  #     - redis
-  #     - neo4j
-  #     - cassandra
-  #     - mongodb
+  api:
+    build: .
+    ports:
+      - 5000:5000
+    depends_on:
+      - redis
+      - neo4j
+      - cassandra
+      - mongodb
 
   mongodb:
     image: mongo:latest
     restart: always
     ports:
       - 27017:27017
-
-  # postgres:
-  #   image: postgres:latest
-  #   restart: always
-  #   ports:
-  #     - 5432:5432
-  #   environment:
-  #     - POSTGRES_DB=covid
-  #     - POSTGRES_USER=postgres
-  #     - POSTGRES_PASSWORD=12345678
-  #   volumes:
-  #     - postgres-data:/var/lib/postgresql/data
 
   redis:
     image: redis:alpine
@@ -46,8 +34,4 @@ services:
     image: cassandra:latest
     restart: always
     ports:
-      - 7000:7000
-
-# volumes:
-#   postgres-data:
-#     driver: local
+      - 9042:9042

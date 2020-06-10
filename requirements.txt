@@ -6,4 +6,4 @@ py2neo
 pymongo
 redis
 python-redis-cache
-flask-jwt-extended
+cassandra-driver
